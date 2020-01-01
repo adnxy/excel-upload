@@ -12,6 +12,7 @@ npm install excel-upload
 
 Excel-upload works on top of the multer. Uploading, storing and parsing files is done
 asynchronous and the result is returned as a Promise.
+ Before calling using excel-upload, make sure you create a corresponding folder where uploaded files will be stored. 
 
 Don't forget the enctype="multipart/form-data" in your form.
 
@@ -19,7 +20,7 @@ Don't forget the enctype="multipart/form-data" in your form.
 
 ```
 <form action="/upload-documents" method="post" enctype="multipart/form-data">
-  <input type="file" name="upload-documents" />
+  <input type="file" name="documents" />
 </form>
 
 ```
@@ -31,7 +32,7 @@ import uploadFile from 'excel-upload';
   
 static async post(req, res, next) {
  
-    const upload = await uploadFile(req, "my-document", "", "upload-documents");
+    const upload = await uploadFile(req, "my-document-name", "./uploaded-documents", "documents");
  
       res.json(upload);
   }

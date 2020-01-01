@@ -14,12 +14,15 @@ async function uploadFile(req, fileName, fileLocation, fieldName) {
 	const { path: filePath } = req.file;
 	const { path: routePath } = req.route;
 	const converted = await convertExcelToJson(filePath, routePath);
+	
 	return converted;
 }
 
 /** Multer disk storage settings, file naming and storing location */
 function prepareFileUpload(fileName, folderName, fieldName) {
-	const uploadedExcelFilePath = path.join(__dirname + folderName);
+	
+	const uploadedExcelFilePath = path.join(process.env.PWD + folderName);
+
 	const storage = multer.diskStorage({
 		destination: (req, file, cb) => {
 			cb(null, uploadedExcelFilePath);
@@ -36,11 +39,13 @@ function prepareFileUpload(fileName, folderName, fieldName) {
 			cb(null, uploadedExcelFileName);
 		}
 	});
+
 	const uploadedFile = util.promisify(
 		multer({
 			storage: storage
 		}).single(fieldName)
 	);
+
 	return uploadedFile;
 }
 
