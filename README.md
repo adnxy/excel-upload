@@ -8,11 +8,14 @@ A node.js module for uploading and converting excel files into JSON.
 npm install excel-upload
 ```
 
+Requirements
+============
+
+* [node.js](http://nodejs.org/) -- v4.5.0 or newer
+
 ### Usage
 
-Excel-upload works on top of the multer. Uploading, storing and parsing files is done
-asynchronous and the result is returned as a Promise.
- Before calling using excel-upload, make sure you create a corresponding folder where uploaded files will be stored. 
+Uploading, storing and parsing files is done asynchronous and the result is returned as a Promise.
 
 Don't forget the enctype="multipart/form-data" in your form.
 
@@ -20,9 +23,8 @@ Don't forget the enctype="multipart/form-data" in your form.
 
 ```
 <form action="/upload-documents" method="post" enctype="multipart/form-data">
-  <input type="file" name="documents" />
+  <input type="file" name="document" />
 </form>
-
 ```
 
 **Controller:**
@@ -32,11 +34,14 @@ import uploadFile from 'excel-upload';
   
 static async post(req, res, next) {
  
-    const upload = await uploadFile(req, "my-document-name", "./uploaded-documents", "documents");
+    const upload = await uploadFile(req, "document-name", "./uploaded", "document");
  
       res.json(upload);
   }
 ```
+
+NOTE: Before using excel-upload, make sure you create a corresponding folder in the root where uploaded files will be stored ("./uploaded"). 
+
 
 ## API
 
@@ -46,6 +51,7 @@ static async post(req, res, next) {
 | fileName | name of the uploaded file|
 | fileLocation | location where uploaded file is stored |
 | fieldName | field name specified in the form |
+
 
 
 ## Built With
