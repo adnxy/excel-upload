@@ -1,6 +1,6 @@
 {
   "name": "excel-upload",
-  "version": "1.4.9",
+  "version": "1.5.9",
   "description": "A node.js module for uploading and converting excel files into json.",
   "main": "index.js",
   "repository": {
